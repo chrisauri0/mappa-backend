@@ -2,6 +2,7 @@ const express = require("express");
 const session = require("express-session");
 const passport = require("./config/passport");
 const authRoutes = require("./routes/auth");
+const planRoutes = require("./routes/plan");
 const sequelize = require("./config/db");
 const cors = require("cors"); // Importar CORS
 
@@ -25,6 +26,8 @@ app.use(
     saveUninitialized: true,
   })
 );
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Inicializar Passport
 app.use(passport.initialize());
@@ -32,6 +35,7 @@ app.use(passport.session());
 
 // Rutas
 app.use("/auth", authRoutes);
+app.use("/plans", planRoutes);
 
 // Sincronizar base de datos
 sequelize.sync().then(() => {
