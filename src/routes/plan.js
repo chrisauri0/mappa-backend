@@ -17,35 +17,49 @@ router.post("/", ensureAdmin, async (req, res) => {
   try {
     const { name_plan, description, duration, price, status } = req.body;
 
-    // Crear un producto en Stripe
+    // 1️⃣ Crear un producto en Stripe
     const stripeProduct = await stripe.products.create({
       name: name_plan,
-      description,
+      description: description,
     });
 
-    // Crear un precio en Stripe (para suscripción)
+    // 2️⃣ Crear un precio en Stripe
     const stripePrice = await stripe.prices.create({
       unit_amount: price * 100, // Stripe maneja precios en centavos
-      currency: "usd",
+      currency: "MXN",
       recurring: { interval: "month" }, // Puede ser "month" o "year"
       product: stripeProduct.id,
     });
 
-    // Guardar el plan en la base de datos con el stripePriceId
+    console.log(
+      "Success! Producto creado en Stripe con ID: " + stripeProduct.id
+    );
+    console.log("Success! Precio creado en Stripe con ID: " + stripePrice.id);
+
+    // 3️⃣ Guardar el plan en la base de datos con el stripePriceId
     const newPlan = await Plan.create({
       name_plan,
       description,
       duration,
       price,
-      stripePriceId: stripePrice.id, // Guardamos el ID del precio de Stripe
+      stripePriceId: stripePrice.id, // Ahora stripePrice.id existe en este contexto
       status,
     });
-    console.log(stripePrice);
 
     res.status(201).json(newPlan);
   } catch (error) {
     console.error("Error al crear el plan:", error);
     res.status(500).json({ error: "Error al crear el plan" });
+  }
+});
+// Ruta pública para obtener todos los planes (sin require de admin)
+router.get("/public-plans", async (req, res) => {
+  try {
+    const plans = await Plan.findAll();
+    res.json(plans);
+  } catch (error) {
+    console.error("Error al obtener los planes:", error);
+    res.status(500).json({ error: "Error al obtener los planes" });
   }
 });
 

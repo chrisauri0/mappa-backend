@@ -12,7 +12,6 @@ passport.use(
     async (accessToken, refreshToken, profile, done) => {
       try {
         let user = await User.findOne({ where: { googleId: profile.id } });
-
         if (!user) {
           user = await User.create({
             googleId: profile.id,
@@ -21,7 +20,6 @@ passport.use(
             photo: profile.photos[0].value,
           });
         }
-
         return done(null, user);
       } catch (err) {
         return done(err, null);
