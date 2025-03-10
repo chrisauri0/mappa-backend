@@ -3,7 +3,5 @@ export class CreatePlan {
   description: string;
   duration: number;
   price: number;
-  stripePriceId: string;
-  stripeProductId: string;
   status: 'available' | 'unavailable';
 }

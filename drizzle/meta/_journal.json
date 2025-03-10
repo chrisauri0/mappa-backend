@@ -15,6 +15,27 @@
       "when": 1739996054334,
       "tag": "0001_noisy_lady_mastermind",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1741485442850,
+      "tag": "0002_curly_dust",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1741488095823,
+      "tag": "0003_silly_rage",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1741577398316,
+      "tag": "0004_cynical_the_hand",
+      "breakpoints": true
     }
   ]
 }

@@ -5,7 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { UsersModule } from './users/users.module';
 import { PlansModule } from './plans/plans.module';
 import { AuthModule } from './auth/auth.module';
-import { StripeService } from './stripe/stripe.service';
+import { UserPlanModule } from './user-plan/user-plan.module';
 
 @Module({
   imports: [
@@ -14,8 +14,9 @@ import { StripeService } from './stripe/stripe.service';
     UsersModule,
     PlansModule,
     AuthModule,
+    UserPlanModule,
   ],
   controllers: [],
-  providers: [StripeService],
+  providers: [],
 })
 export class AppModule {}
