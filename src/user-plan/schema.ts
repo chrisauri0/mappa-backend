@@ -8,10 +8,10 @@ export const userPlans = sqliteTable('user_plans', {
   userName: text('user_name'),
   planId: integer('plan_id').notNull(),
   planName: text('plan_name'),
-  startDate: text('start_date').default(sql`CURRENT_TIMESTAMP`),
+  startDate: text('start_date').notNull(),
   endDate: text('end_date').notNull(),
   status: text('status', { enum: ['active', 'inactive'] })
     .default('active')
     .notNull(),
-  compras: integer('compras').notNull(),
+  compras: integer('compras').default(0).notNull(),
 });
