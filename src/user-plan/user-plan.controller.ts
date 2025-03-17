@@ -3,19 +3,17 @@ import { UserPlanService } from './user-plan.service';
 import { CreateUserPlan, UpdateUserPlan } from './dto';
 import { get } from 'http';
 import { getRandomValues } from 'crypto';
+import * as schema from './schema';
 
 @Controller('user-plans')
 export class UserPlanController {
   constructor(private readonly userPlanService: UserPlanService) {}
 
   @Post()
-  async createUserPlan(@Body() request: CreateUserPlan) {
-    return this.userPlanService.createUserPlan(request);
+  async createUserPlan(@Body() Uplan: typeof schema.userPlans.$inferInsert) {
+    return this.userPlanService.createUserPlan(Uplan);
   }
-  @Post(':userId')
-  async updateUserPlan(@Body() request: UpdateUserPlan, @Param('userPlanId') userPlanId: number) {
-    return this.userPlanService.updateUserPlan(userPlanId, request);
-  }
+
   @Get()
   async getUsersPlans() {
     return this.userPlanService.getUsersPlans();

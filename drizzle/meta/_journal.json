@@ -36,6 +36,34 @@
       "when": 1741577398316,
       "tag": "0004_cynical_the_hand",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1741804138423,
+      "tag": "0005_amazing_hydra",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1741895021859,
+      "tag": "0006_slimy_hawkeye",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "6",
+      "when": 1741895169940,
+      "tag": "0007_low_edwin_jarvis",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1742191864016,
+      "tag": "0008_glorious_shatterstar",
+      "breakpoints": true
     }
   ]
 }

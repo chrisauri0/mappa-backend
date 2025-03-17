@@ -12,8 +12,7 @@ export class UserPlanService {
   ) {}
 
   async createUserPlan(userPlan: typeof schema.userPlans.$inferInsert) {
-    await this.database.insert(schema.userPlans).values(userPlan);
-    return userPlan;
+    return this.database.insert(schema.userPlans).values(userPlan);
   }
 
   async getUsersPlans() {

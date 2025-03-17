@@ -6,6 +6,8 @@ import { UsersModule } from './users/users.module';
 import { PlansModule } from './plans/plans.module';
 import { AuthModule } from './auth/auth.module';
 import { UserPlanModule } from './user-plan/user-plan.module';
+import { MongoModule } from './mongo/mongo.module';
+import { SensoresModule } from './sensores/sensores.module';
 
 @Module({
   imports: [
@@ -15,6 +17,8 @@ import { UserPlanModule } from './user-plan/user-plan.module';
     PlansModule,
     AuthModule,
     UserPlanModule,
+    MongoModule,
+    SensoresModule,
   ],
   controllers: [],
   providers: [],

@@ -1,0 +1,1 @@
+ALTER TABLE `user_plans` ADD `start_date` text DEFAULT CURRENT_TIMESTAMP;

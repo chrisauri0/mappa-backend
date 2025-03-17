@@ -5,10 +5,10 @@ import { AuthDto } from './dto';
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
-  @Post('/local/signup')
-  signupLocal(@Body() dto: AuthDto) {
-    this.authService.signupLocal(dto);
-  }
+  // @Post('/local/signup')
+  // signupLocal(@Body() dto: AuthDto) {
+  //   this.authService.signupLocal(dto);
+  // }
 
   @Post('/local/signin')
   signinLocal(@Body() dto: AuthDto) {

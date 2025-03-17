@@ -4,9 +4,15 @@ import { sql } from 'drizzle-orm';
 export const users = sqliteTable('users', {
   id: integer('id').primaryKey(),
   email: text('email').unique().notNull(),
-  password: text('password').default(''),
-  hash: text('hash'),
-  hashedRt: text('hashedRt'),
+  password: text('password').notNull(),
+
+  codeActivation: text('code_activation').default(sql`(hex(randomblob(16)))`),
+  subscripcion: text('subscripcion'),
+
+  status: text('status', { enum: ['active', 'inactive'] })
+    .default('inactive')
+    .notNull(),
+
   role: text('role', { enum: ['cliente', 'admin'] })
     .default('cliente')
     .notNull(),

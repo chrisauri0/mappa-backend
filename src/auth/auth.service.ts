@@ -11,14 +11,14 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async signupLocal(dto: AuthDto) {
-    const hashedPassword = await bcrypt.hash(dto.password, 10);
-    const user = await this.usersService.create({
-      ...dto,
-      password: hashedPassword,
-    });
-    return this.signUser(user.id?.toString() || '', user.email);
-  }
+  // async signupLocal(dto: AuthDto) {
+  //   const hashedPassword = await bcrypt.hash(dto.password, 10);
+  //   const user = await this.usersService.create({
+  //     ...dto,
+  //     password: hashedPassword,
+  //   });
+  //   return this.signUser(user.id?.toString() || '', user.email);
+  // }
 
   async signinLocal(dto: AuthDto) {
     const user = await this.usersService.findByEmail(dto.email);
