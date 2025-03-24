@@ -14,6 +14,15 @@ export class SensoresService {
     const medicion = new this.sensorTemperaturaModel({
       sensorId,
       temperature,
+      humedad,
+      timestamp: new Date(),
+    });
+    return medicion.save();
+  }
+  async createTiempo(sensorId: string, distancia: number) {
+    const medicion = new this.sensorTemperaturaModel({
+      sensorId,
+      distancia,
       timestamp: new Date(),
     });
     return medicion.save();

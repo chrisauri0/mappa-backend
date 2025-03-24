@@ -11,6 +11,10 @@ export class SensoresController {
   ) {
     return this.sensoresService.createMedicion(body.sensorId, body.temperature, body.humedad);
   }
+  @Post('tiempoCama')
+  async createSensorTiempo(@Body() body: { sensorId: string; distancia: number }) {
+    return this.sensoresService.createTiempo(body.sensorId, body.distancia);
+  }
 
   @Get('temperatura/:sensorId')
   async getSensorTemperatura(@Param('sensorId') sensorId: string) {
