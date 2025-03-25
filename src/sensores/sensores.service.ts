@@ -2,12 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { SensorTemperatura } from './schemas/sensorTemperatura.schema';
+import { Rele } from './schemas/rele.schema';
 
 @Injectable()
 export class SensoresService {
   constructor(
-    @InjectModel(SensorTemperatura.name)
-    private sensorTemperaturaModel: Model<SensorTemperatura>,
+    @InjectModel(SensorTemperatura.name) private sensorTemperaturaModel: Model<SensorTemperatura>,
+    @InjectModel(Rele.name) private releModel: Model<Rele>,
   ) {}
 
   async createMedicion(sensorId: string, temperature: number, humedad: number) {
@@ -29,6 +30,20 @@ export class SensoresService {
   }
 
   async getMediciones(sensorId: string) {
-    return this.sensorTemperaturaModel.find({ sensorId });
+    return this.sensorTemperaturaModel
+      .find({ sensorId })
+      .sort({ timestamp: -1 }) // Ordenar por timestamp en orden descendente
+      .limit(10); // Limitar el resultado a los últimos 5 registros
+  }
+  async toggleRele(sensorId: string, estado: 'on' | 'off') {
+    const rele = new this.releModel({
+      sensorId,
+      estado,
+      timestamp: new Date(),
+    });
+    return rele.save();
+  }
+  async getRele() {
+    return this.releModel.findOne().sort({ timestamp: -1 });
   }
 }

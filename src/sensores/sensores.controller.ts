@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Body, Param } from '@nestjs/common';
+import { Controller, Post, Get, Body, Patch, Param } from '@nestjs/common';
 import { SensoresService } from './sensores.service';
 
 @Controller('sensores')
@@ -19,5 +19,16 @@ export class SensoresController {
   @Get('temperatura/:sensorId')
   async getSensorTemperatura(@Param('sensorId') sensorId: string) {
     return this.sensoresService.getMediciones(sensorId);
+  }
+  @Patch('rele/:sensorId')
+  async toggleRele(@Param('sensorId') sensorId: string, @Body() body: { estado: 'on' | 'off' }) {
+    if (!['on', 'off'].includes(body.estado)) {
+      throw new Error('Estado inválido. Debe ser "on" o "off".');
+    }
+    return this.sensoresService.toggleRele(sensorId, body.estado);
+  }
+  @Get('rele')
+  async getRele() {
+    return this.sensoresService.getRele();
   }
 }
