@@ -4,6 +4,7 @@ import { sql } from 'drizzle-orm';
 export const users = sqliteTable('users', {
   id: integer('id').primaryKey(),
   email: text('email').unique().notNull(),
+  name: text('name'),
   password: text('password').notNull(),
 
   codeActivation: text('code_activation').default(sql`(hex(randomblob(16)))`),

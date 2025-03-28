@@ -3,12 +3,14 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { SensorTemperatura } from './schemas/sensorTemperatura.schema';
 import { Rele } from './schemas/rele.schema';
+import { Despertador } from './schemas/despertador.schema';
 
 @Injectable()
 export class SensoresService {
   constructor(
     @InjectModel(SensorTemperatura.name) private sensorTemperaturaModel: Model<SensorTemperatura>,
     @InjectModel(Rele.name) private releModel: Model<Rele>,
+    @InjectModel(Despertador.name) private despertadorModel: Model<Despertador>,
   ) {}
 
   async createMedicion(sensorId: string, temperature: number, humedad: number) {
@@ -45,5 +47,16 @@ export class SensoresService {
   }
   async getRele() {
     return this.releModel.findOne().sort({ timestamp: -1 });
+  }
+  async toggleDespertador(sensorId: string, estado: 'on' | 'off') {
+    const rele = new this.despertadorModel({
+      sensorId,
+      estado,
+      timestamp: new Date(),
+    });
+    return rele.save();
+  }
+  async getDespertador() {
+    return this.despertadorModel.findOne().sort({ timestamp: -1 });
   }
 }

@@ -13,6 +13,10 @@ export class UserPlanController {
   async createUserPlan(@Body() Uplan: typeof schema.userPlans.$inferInsert) {
     return this.userPlanService.createUserPlan(Uplan);
   }
+  @Get('/total-ventas')
+  async getTotalVentas() {
+    return this.userPlanService.getTotalVentas();
+  }
 
   @Get()
   async getUsersPlans() {

@@ -31,4 +31,18 @@ export class SensoresController {
   async getRele() {
     return this.sensoresService.getRele();
   }
+  @Patch('despertador/:sensorId')
+  async toggleDespertador(
+    @Param('sensorId') sensorId: string,
+    @Body() body: { estado: 'on' | 'off' },
+  ) {
+    if (!['on', 'off'].includes(body.estado)) {
+      throw new Error('Estado inválido. Debe ser "on" o "off".');
+    }
+    return this.sensoresService.toggleRele(sensorId, body.estado);
+  }
+  @Get('despertador')
+  async getDespertador() {
+    return this.sensoresService.getRele();
+  }
 }

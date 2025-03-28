@@ -14,6 +14,10 @@ export class UserPlanService {
   async createUserPlan(userPlan: typeof schema.userPlans.$inferInsert) {
     return this.database.insert(schema.userPlans).values(userPlan);
   }
+  async getTotalVentas() {
+    const query = 'SELECT * FROM TotalVentas'; // Consulta para obtener los datos de la vista
+    return this.database.run(query); // Ejecutar la consulta
+  }
 
   async getUsersPlans() {
     return this.database.select().from(schema.userPlans);
