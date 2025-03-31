@@ -7,6 +7,7 @@ import {
   Put,
   Patch,
   Param,
+  Query,
   BadRequestException,
   NotFoundException,
 } from '@nestjs/common';
@@ -32,11 +33,11 @@ export class UsersController {
   }
 
   @Get('/login/movil')
-  async loginMovil(@Body() Body: { codeActivation: string }) {
-    if (!Body.codeActivation) {
-      throw new BadRequestException('Email and password must be provided');
+  async loginMovil(@Query('codeActivation') codeActivation: string) {
+    if (!codeActivation) {
+      throw new BadRequestException('El código de activación es obligatorio');
     }
-    return this.userService.loginMovil(Body.codeActivation);
+    return this.userService.loginMovil(codeActivation);
   }
 
   @Post('/login')
