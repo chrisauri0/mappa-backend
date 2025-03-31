@@ -91,4 +91,11 @@ export class UsersService {
 
     return user;
   }
+  async loginMovil(codeActivation: string): Promise<typeof schema.users.$inferSelect | undefined> {
+    const user = await this.database
+      .select()
+      .from(schema.users)
+      .where(eq(schema.users.codeActivation, codeActivation));
+    return user.length ? user[0] : undefined;
+  }
 }

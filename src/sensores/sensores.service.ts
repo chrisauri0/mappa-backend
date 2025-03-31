@@ -46,7 +46,7 @@ export class SensoresService {
     return rele.save();
   }
   async getRele() {
-    return this.releModel.findOne().sort({ timestamp: -1 });
+    return this.releModel.findOne({ sensorId: 'sensor123' }).sort({ timestamp: -1 });
   }
   async toggleDespertador(sensorId: string, estado: 'on' | 'off') {
     const rele = new this.despertadorModel({
@@ -57,6 +57,14 @@ export class SensoresService {
     return rele.save();
   }
   async getDespertador() {
-    return this.despertadorModel.findOne().sort({ timestamp: -1 });
+    const despertador = await this.despertadorModel
+      .findOne({ sensorId: 'alarma' })
+      .sort({ timestamp: -1 });
+
+    if (!despertador) {
+      return { mensaje: 'No hay datos disponibles para el despertador' };
+    }
+
+    return despertador;
   }
 }

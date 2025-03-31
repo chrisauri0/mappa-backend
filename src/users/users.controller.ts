@@ -31,6 +31,14 @@ export class UsersController {
     return this.userService.getActiveUsers();
   }
 
+  @Get('/login/movil')
+  async loginMovil(@Body() Body: { codeActivation: string }) {
+    if (!Body.codeActivation) {
+      throw new BadRequestException('Email and password must be provided');
+    }
+    return this.userService.loginMovil(Body.codeActivation);
+  }
+
   @Post('/login')
   async login(@Body() request: SelectUser) {
     if (!request.email || !request.password) {

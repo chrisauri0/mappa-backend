@@ -39,10 +39,10 @@ export class SensoresController {
     if (!['on', 'off'].includes(body.estado)) {
       throw new Error('Estado inválido. Debe ser "on" o "off".');
     }
-    return this.sensoresService.toggleRele(sensorId, body.estado);
+    return this.sensoresService.toggleDespertador(sensorId, body.estado);
   }
   @Get('despertador')
   async getDespertador() {
-    return this.sensoresService.getRele();
+    return this.sensoresService.getDespertador();
   }
 }
