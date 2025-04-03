@@ -19,10 +19,17 @@ export class PostgresService {
     return data;
   }
   async createUser(request: { email: string; password: string; name: string }) {
-    const { email, password, name } = request;
-    const data = await this.sql`
-        INSERT INTO users (email, password, name) VALUES (${email}, ${password},${name}) RETURNING id, email, password, name;
-        `;
-    return data;
+    try {
+      const { email, password, name } = request;
+      const data = await this.sql`
+        INSERT INTO users (email, password, name) 
+        VALUES (${email}, ${password}, ${name}) 
+        RETURNING id, email, password, name;
+      `;
+      return data;
+    } catch (error) {
+      console.error('Error al registrar usuario en Postgres:', error);
+      throw new Error(error.message || 'Error al registrar usuario');
+    }
   }
 }
