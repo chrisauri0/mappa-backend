@@ -18,4 +18,12 @@ export class PostgresController {
   async createUser(@Body() request: { email: string; password: string; name: string }) {
     return this.postgresService.createUser(request);
   }
+  @Get('compras-usuarios')
+  async getComprasUsuarios() {
+    return this.postgresService.getComprasUsuarios();
+  }
+  @Get('ticket-promedio')
+  async getTicket() {
+    return this.postgresService.getTicketPromedio();
+  }
 }

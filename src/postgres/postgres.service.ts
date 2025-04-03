@@ -26,6 +26,35 @@ export class PostgresService {
     `;
     return data;
   }
+  async getTicketPromedio() {
+    const data = await this.sql`
+      SELECT AVG(plan_price) AS promedio_precio FROM (
+    SELECT plan_price FROM user_plans WHERE compras = 1
+) AS compras_realizadas;
+
+
+    `;
+    return data;
+  }
+
+  async getComprasUsuarios() {
+    const data = await this.sql`
+       SELECT
+ users.name AS Usuario,
+ COUNT(user_plans.id) AS Planes_Contratados
+FROM
+ users
+INNER JOIN
+ user_plans ON users.id = user_plans.user_id
+GROUP BY
+ users.name
+HAVING
+ COUNT(user_plans.id) > 1
+ORDER BY
+ Planes_Contratados DESC;
+        `;
+    return data;
+  }
 
   async createUser(request: { email: string; password: string; name: string }) {
     try {
