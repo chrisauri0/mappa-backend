@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { UserPlanModule } from './user-plan/user-plan.module';
 import { MongoModule } from './mongo/mongo.module';
 import { SensoresModule } from './sensores/sensores.module';
+import { PostgresModule } from './postgres/postgres.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { SensoresModule } from './sensores/sensores.module';
     UserPlanModule,
     MongoModule,
     SensoresModule,
+    PostgresModule,
   ],
   controllers: [],
   providers: [],

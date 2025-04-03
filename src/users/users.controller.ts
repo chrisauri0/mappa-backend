@@ -21,6 +21,10 @@ export class UsersController {
   async getUsers() {
     return this.userService.getUsers();
   }
+  // @Post('/prueba')
+  // async prueba(@Body() request: { name: string }) {
+  //   return this.userService.prueba(request);
+  // }
 
   @Post()
   async createUser(@Body() request: CreateUser) {
