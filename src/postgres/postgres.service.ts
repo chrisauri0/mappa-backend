@@ -26,6 +26,13 @@ export class PostgresService {
     `;
     return data;
   }
+  async getProcedure2() {
+    // Ejemplo de llamada a un procedimiento almacenado
+    const data = await this.sql`
+call get_active_users2();
+    `;
+    return data;
+  }
   async getTicketPromedio() {
     const data = await this.sql`
       SELECT AVG(plan_price) AS promedio_precio FROM (
