@@ -18,6 +18,15 @@ export class PostgresService {
     `;
     return data;
   }
+  async getProcedure() {
+    // Ejemplo de llamada a un procedimiento almacenado
+    const data = await this.sql`
+      SELECT * from get_active_users();
+
+    `;
+    return data;
+  }
+
   async createUser(request: { email: string; password: string; name: string }) {
     try {
       const { email, password, name } = request;

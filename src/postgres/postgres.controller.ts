@@ -9,6 +9,10 @@ export class PostgresController {
   async getUsers() {
     return this.postgresService.getData();
   }
+  @Get('/procedure')
+  async getProcedure() {
+    return this.postgresService.getProcedure();
+  }
 
   @Post('users')
   async createUser(@Body() request: { email: string; password: string; name: string }) {
